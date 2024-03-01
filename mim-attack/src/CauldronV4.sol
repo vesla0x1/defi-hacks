@@ -28,6 +28,7 @@ import "interfaces/IOracle.sol";
 import "interfaces/ISwapperV2.sol";
 import "interfaces/IBentoBoxV1.sol";
 import "interfaces/IBentoBoxOwner.sol";
+import "forge-std/Test.sol";
 
 // solhint-disable avoid-low-level-calls
 // solhint-disable no-inline-assembly
@@ -35,7 +36,7 @@ import "interfaces/IBentoBoxOwner.sol";
 /// @title Cauldron
 /// @dev This contract allows contract calls to any contract (except BentoBox)
 /// from arbitrary callers thus, don't trust calls from this contract in any circumstances.
-contract CauldronV4 is BoringOwnable, IMasterContract {
+contract CauldronV4 is BoringOwnable, IMasterContract, Test {
     using BoringMath for uint256;
     using BoringMath128 for uint128;
     using RebaseLibrary for Rebase;
@@ -310,6 +311,10 @@ contract CauldronV4 is BoringOwnable, IMasterContract {
     ) internal {
         if (skim) {
             uint256 balance = bentoBox.balanceOf(token, address(this));
+            emit log_named_decimal_uint("share", share, 18);
+            emit log_named_decimal_uint("balance", balance, 18);
+            emit log_named_decimal_uint("total", total, 18);
+            emit log_named_decimal_uint("balance sub", balance.sub(total), 18);
             require(share <= balance.sub(total), "Cauldron: Skim too much");
         } else {
             bentoBox.transfer(token, msg.sender, address(this), share);
@@ -399,6 +404,8 @@ contract CauldronV4 is BoringOwnable, IMasterContract {
         uint256 part
     ) internal returns (uint256 amount) {
         (totalBorrow, amount) = totalBorrow.sub(part, true);
+        emit log_named_uint("elastic", totalBorrow.elastic);
+        emit log_named_uint("base", totalBorrow.base);
         userBorrowPart[to] = userBorrowPart[to].sub(part);
 
         uint256 share = bentoBox.toShare(magicInternetMoney, amount, true);
@@ -770,7 +777,12 @@ contract CauldronV4 is BoringOwnable, IMasterContract {
 
         require(previousElastic - amount > 1000 * 1e18, "Total Elastic too small");
 
+        emit log_named_uint("elastic", totalBorrow.elastic);
+        emit log_named_uint("base", totalBorrow.base);
         totalBorrow.elastic = previousElastic - amount;
+
+        emit log_named_uint("elastic", totalBorrow.elastic);
+        emit log_named_uint("base", totalBorrow.base);
 
         emit LogRepayForAll(amount, previousElastic, totalBorrow.elastic);
         return amount;
