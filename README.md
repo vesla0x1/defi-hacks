@@ -15,9 +15,9 @@ Each directory of this repository is a foundry project containing:
 
 
 ## Summary
-| Hack                      | Date          | Category        | Loss      | Write up | Fix patch  |
-|:-------------------------:|:-------------:|:---------------:|:---------:|:--------:|:----------:|
-| [MiM Spell](./mim-spell/) | 2024/01/30    | Rounding error  | ~$6,5M    | [📝]()   | [🛠️]()     |
+| Hack                      | Date          | Category        | Loss      | Write up                      | Fix patch                                                                                    |
+|:-------------------------:|:-------------:|:---------------:|:---------:|:-----------------------------:|:--------------------------------------------------------------------------------------------:|
+| [MiM Spell](./mim-spell/) | 2024/01/30    | Rounding error  | ~$6,5M    | [📝](./mim-attack/README.md)  | [🛠️](https://github.com/vesla0x1/defi-hacks/commit/bba00fd2666ffc00f9def56cd3e71e769249dcdc) |
 
 
 
