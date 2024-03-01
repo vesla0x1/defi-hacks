@@ -1,0 +1,3 @@
+[submodule "mim-attack/lib/forge-std"]
+	path = mim-attack/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
