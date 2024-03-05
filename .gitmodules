@@ -1,6 +1,6 @@
-[submodule "mim-attack/lib/forge-std"]
-	path = mim-attack/lib/forge-std
+[submodule "mim-spell/lib/forge-std"]
+	path = mim-spell/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
-[submodule "mim-attack/lib/boringsolidity"]
-	path = mim-attack/lib/boringsolidity
+[submodule "mim-spell/lib/boringsolidity"]
+	path = mim-spell/lib/boringsolidity
 	url = https://github.com/boringcrypto/boringsolidity
