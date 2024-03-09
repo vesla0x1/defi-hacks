@@ -17,7 +17,7 @@ Each directory of this repository is a foundry project containing:
 ## Summary
 | Hack                      | Date          | Category        | Loss      | Write up                      | Fix patch                                                                                    |
 |:-------------------------:|:-------------:|:---------------:|:---------:|:-----------------------------:|:--------------------------------------------------------------------------------------------:|
-| [MiM Spell](./mim-spell/) | 2024/01/30    | Rounding error  | ~$6,5M    | [📝](./mim-attack/README.md)  | [🛠️](https://github.com/vesla0x1/defi-hacks/commit/bba00fd2666ffc00f9def56cd3e71e769249dcdc) |
+| [MiM Spell](./mim-spell/) | 2024/01/30    | Precision loss  | ~$6,5M    | [📝](./mim-spell/README.md)  | [🛠️]((https://github.com/vesla0x1/defi-hacks/commit/ab6bc9b7f43cd3f45496a47b3e4038bb79e9bf58)) |
 
 
 
@@ -25,16 +25,22 @@ Each directory of this repository is a foundry project containing:
 You need to have git and [foundry](https://book.getfoundry.sh/getting-started/installation) installed.
 
 Clone this repository to your local machine:
-`git clone https://github.com/vesla0x1/defi-hacks.git`
+```
+git clone https://github.com/vesla0x1/defi-hacks.git
+```
 
 Enter in a sub-directory containing an attack:
-`cd mim-spell`
+```
+cd mim-spell
+```
 
 Change to a branch and play around:
 `git checkout <playground|fix>`
 
 Run test:
-`forge test -vv`
+```
+forge test -vv
+```
 
 ## Support me
 If this supported you, I would appreciate if you could support me as well by sending some crypto to `0xb49d817A0Ee1bfDBb9cb0b2599eFf01f6cE18E13`.
