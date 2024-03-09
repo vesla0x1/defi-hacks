@@ -398,6 +398,7 @@ contract CauldronV4 is BoringOwnable, IMasterContract {
         bool skim,
         uint256 part
     ) internal returns (uint256 amount) {
+        require(part * totalBorrow.elastic >= totalBorrow.base, "Part amount is not enough to repay.");
         (totalBorrow, amount) = totalBorrow.sub(part, true);
         userBorrowPart[to] = userBorrowPart[to].sub(part);
 
