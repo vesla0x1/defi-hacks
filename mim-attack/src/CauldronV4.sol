@@ -398,7 +398,7 @@ contract CauldronV4 is BoringOwnable, IMasterContract {
         bool skim,
         uint256 part
     ) internal returns (uint256 amount) {
-        (totalBorrow, amount) = totalBorrow.sub(part, false);
+        (totalBorrow, amount) = totalBorrow.sub(part, true);
         userBorrowPart[to] = userBorrowPart[to].sub(part);
 
         uint256 share = bentoBox.toShare(magicInternetMoney, amount, true);
