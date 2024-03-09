@@ -76,7 +76,7 @@ final      => {elastic: 1, base: 120080183810681886665215049729}
 
 Since the amount of `base` shares of MiM had increased to (almost) infinity, the entire balance of MiM tokens in Degenbox (5.000.047 when the attack happened) was negligible in comparison this amount of `totalBorrow.base`. This made possible the attacker to bypass the health check in [`CauldronV4.sol#L272`](https://github.com/vesla0x1/defi-hacks/blob/master/mim-spell/src/CauldronV4.sol#L272), since the division for [`totalBorrow.base`](https://github.com/vesla0x1/defi-hacks/blob/master/mim-spell/src/CauldronV4.sol#L272C71-L272C88) will always result in zero and the attacker was able to borrow (and withdraw) all MiM tokens in Degenbox for a very low collateral amount, using another account, causing ~$6.5M loss to the protocol.
 
-## 2. Can you propose a one-line patch?
+## 2. Mitigation
 As discussed, the root cause of the problem was a rounding error in [`CauldronV4.sol::_repay`](https://github.com/vesla0x1/defi-hacks/blob/master/mim-spell/src/CauldronV4.sol#L401), introduced when [`BoringRebase.sol::toElastic`](https://github.com/boringcrypto/BoringSolidity/blob/78f4817d9c0d95fe9c45cd42e307ccd22cf5f4fc/contracts/libraries/BoringRebase.sol#L36) is calculated:
 
 $$
