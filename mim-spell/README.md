@@ -1,6 +1,6 @@
 # MiM Spell Attack
 
-## 1. Anlysis of the root cause
+## 1. Root cause
 ### TL;DR
 The root cause of the attack was a precision loss introduced by a rounding error in [`CauldronV4.sol::_repay`](https://github.com/vesla0x1/defi-hacks/blob/master/mim-spell/src/CauldronV4.sol#L396-L407), when [`toElastic`](https://github.com/boringcrypto/BoringSolidity/blob/78f4817d9c0d95fe9c45cd42e307ccd22cf5f4fc/contracts/libraries/BoringRebase.sol#L28-L41) is calculated. [`toElastic`](https://github.com/boringcrypto/BoringSolidity/blob/78f4817d9c0d95fe9c45cd42e307ccd22cf5f4fc/contracts/libraries/BoringRebase.sol#L28-L41) is evaluated as `x = (part * totalBorrow.elastic) / totalBorrow.base` and in order to handle the precision loss caused by the division, it rounds up favoring the protocol. However, when (part * totalBorrow.elastic) < totalBorrow.base, rounding up will cause `toElastic` to be always evaluated to 1, violating the invariant of the exchange rate (`totalBorrow.elastic` / `totalBorrow.base`) before repayments $e$, being approximately the exchange rate after, $e'$.
 
